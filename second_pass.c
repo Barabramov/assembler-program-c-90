@@ -44,9 +44,9 @@ bool second_pass(FILE *input, char *file_name, int *ic, int* dc, bool first_vali
     free_symbol_table();
     free_s((void **) &curr_symbol);
     return is_valid;
-
-
 }
+
+
 
 /* create the .ob file and go over the array lists.
  * convert the attribute to binary code and then to base64. */
@@ -76,6 +76,8 @@ void object_file(char *file_name, action_node *first_action_node, data_node *fir
     free_s((void **) &output);
 }
 
+
+
 void free_data_and_action_nodes( data_node **last_data_node, action_node **last_action_node, data_node** first_data_node, action_node** first_action_node){
     while (*first_action_node) {
         *last_action_node = (*first_action_node)->next;
@@ -88,6 +90,8 @@ void free_data_and_action_nodes( data_node **last_data_node, action_node **last_
         *first_data_node = *last_data_node;
     }
 }
+
+
 
 void free_symbol_table() {
     int i;
@@ -102,6 +106,8 @@ void free_symbol_table() {
     }
     free_s((void **) &curr_symbol_table);
 }
+
+
 
 /* create the .ent file and go over the symbol_table.
  * add to file the symbol that the entry flag is true. */
@@ -137,12 +143,8 @@ bool first_word_symbol(symbol *curr_symbol, char *token, data_node **last_data_n
         handle_data_line(token, last_data_node,  first_data_node);
         return true;
     }
-    else
-    {
-        return handle_action_line(token,last_action_node, first_action_node, ic,file_name, line);
-    }
+    else return handle_action_line(token,last_action_node, first_action_node, ic,file_name, line);
 }
-
 
 
 
@@ -174,6 +176,7 @@ void handle_data_line(char* token, data_node** last_data_node, data_node** first
             break;
     }
 }
+
 
 
 void handle_case_data_type(char* token, data_node** last_data_node, data_node** first_data_node) {
@@ -215,6 +218,7 @@ bool handle_action_line(char* token, action_node** last_action_node, action_node
 }
 
 
+
 /* if action have only one operand. */
 bool handle_one_operand(operation *curr_op, char* token, action_node** last_action_node, action_node** first_action_node, int *ic, char* file_name, int* line)
 {
@@ -249,6 +253,7 @@ bool handle_two_operands(operation *curr_op, action_node** last_action_node, act
 }
 
 
+
 /* here we find the type of the operand for knowing how to handle with it. */
 void switch_types_operands(char* token, int *last_was_register, action_node** last_action_node, action_node** first_action_node, int round, int *ic, char* file_name, int* line)
 {
@@ -280,6 +285,7 @@ void switch_types_operands(char* token, int *last_was_register, action_node** la
 }
 
 
+
 /* check if the operand type is match to the action definition. */
 bool check_operands_validation(operation *curr_op, int operand_number, int source)
 {
@@ -294,6 +300,7 @@ bool check_operands_validation(operation *curr_op, int operand_number, int sourc
 }
 
 
+
 void second_register(action_node** last_action_node, char* token, action_node** first_action_node, int *ic)
 {
     action_node* next_action_node;
@@ -305,6 +312,8 @@ void second_register(action_node** last_action_node, char* token, action_node** 
     insert_action(next_action_node, last_action_node, first_action_node, ic);
 }
 
+
+
 int operand_type(char* token, int* line)
 {
     if (find_symbol(token)) return 3;
@@ -314,11 +323,13 @@ int operand_type(char* token, int* line)
 }
 
 
+
 void binary_code_data_line(char* binary_num, data_node** last_data_node, data_node** first_data_node, data_node** curr_data_node)
 {
     (*curr_data_node)->number = atoi(binary_num);
     insert_data(*curr_data_node, last_data_node, first_data_node);
 }
+
 
 
 /* insert all the details of the first line to the current action node. */
@@ -332,6 +343,7 @@ void binary_code_first_line(unsigned int a_r_e, unsigned int dest_address, unsig
     curr_action_node->bit = ACTION_TYPE;
     insert_action(curr_action_node, last_action_node, first_action_node, ic);
 }
+
 
 
 /* insert all the details of digit or symbol to the current action node. */
@@ -359,6 +371,7 @@ void binary_code_digit_or_symbol(unsigned int a_r_e, unsigned int rest_address, 
 }
 
 
+
 void close_ext_file( FILE *file, int to_free)
 {
     static FILE *output_file = NULL;
@@ -384,6 +397,7 @@ void insert_action(action_node *curr_action_node, action_node** last_action_node
 }
 
 
+
 void insert_data(data_node *curr_data_node, data_node** last_data_node, data_node** first_data_node)
 {
     curr_data_node->next= NULL;
@@ -393,7 +407,6 @@ void insert_data(data_node *curr_data_node, data_node** last_data_node, data_nod
         (*last_data_node) = curr_data_node;
 
     }
-
     else {
         *first_data_node = curr_data_node;
         *last_data_node =  *first_data_node;
