@@ -34,9 +34,6 @@ void pre_processor_main (char *file_name) {
 }
 
 
-
-
-
 macro_node * not_in_macro(char curr_line[MAX_IN_LINE], int* is_in_macro, macro_node *curr_macro, FILE *output_file)
 {
     macro_node *macro;
@@ -60,7 +57,6 @@ macro_node * not_in_macro(char curr_line[MAX_IN_LINE], int* is_in_macro, macro_n
             else fprintf(output_file, "%s\n", curr_line);
     }
     return NULL;
-
 }
 
 
@@ -84,10 +80,7 @@ macro_node * start_macro(char* token, int* is_in_macro, macro_node *curr_macro )
 void add_macro_to_file(macro_node *macro, FILE *output_file)
 {
     int i;
-    for (i = 0; i < macro->line_counter; i++)
-    {
-        fprintf(output_file, "%s\n", macro->lines[i]);
-    }
+    for (i = 0; i < macro->line_counter; i++){fprintf(output_file, "%s\n", macro->lines[i]);}
 }
 
 
