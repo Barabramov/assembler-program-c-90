@@ -35,6 +35,7 @@ void add_line_to_macro(macro_node* macro, char* line)
     macro->line_counter += 1;
 }
 
+
 /* search if we already saved the macro. */
 macro_node* search_macro(char* name)
 {
@@ -52,6 +53,7 @@ macro_node* search_macro(char* name)
     }
     return macro;
 }
+
 
 void free_macro_table()
 {
@@ -71,10 +73,7 @@ void free_macro_list(macro_node* head)
    {
        macro_node* temp = head;
        int i;
-       for (i=0; i< head->line_counter; i++)
-       {
-           free(head-> lines[i]);
-       }
+       for (i=0; i< head->line_counter; i++){free(head-> lines[i]);}
        free(head-> lines);
        head = head->next;
        free(temp);
