@@ -14,4 +14,10 @@ This project deals with building assembler software in the C-90 language, for a 
          * ".ent" -  contains the symbols on which the ".entry" command was applied, and the address where the symbol is defined in the rest of the code.
          * ".ext" -  contains the symbols on which the ".extern" command was applied, and the addresses where the symbol is used in the rest of the code.
          * ".ob" - a word is 12 bits in size. Every 6 bits will be converted to an appropriate character according to the table defining 64Base. Each word will be added to the file on a separate line.
-
+     
+### Tools files:
+ - main.c - The main code file of the project.
+ -  utilities.c - Contains the functions dealing with the memory, general functions and the data structures.
+ -  files.c - creat, open, and close the files.
+ -  macros.c  
+ -  makefile
